@@ -9,7 +9,7 @@ class Product {
     public $categories;
     public $img = "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
 
-    public function __construct(Category $categories, $name, $price, $stars = 0, $reviews = 0, $deliveryType = "standard") {
+    public function __construct(array $categories, $name, $price, $stars = 0, $reviews = 0, $deliveryType = "standard") {
         $this->categories = $categories;
         $this->name = $name;
         $this->price = $price;
@@ -40,6 +40,30 @@ class Product {
     public function setImg($img) {
         $this->img = $img;
     }
+
+    public function getCathegoryAsString() {
+
+		$categoriesArray = [];
+
+		foreach($this->categories as $category) {
+			array_push($categoriesArray, $category->name);
+		}
+
+		return implode(", ", $categoriesArray);
+
+	}
+
+    public function getCathegoryIconAsString() {
+
+		$categoriesIconArray = [];
+
+		foreach($this->categories as $category) {
+			array_push($categoriesIconArray, $category->icon);
+		}
+
+		return implode(" ", $categoriesIconArray);
+
+	}
 }
 
 ?>

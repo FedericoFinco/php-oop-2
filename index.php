@@ -3,6 +3,7 @@ require __DIR__ . "/Product.php";
 require __DIR__ . "/Category.php";
 require __DIR__ . "/Food.php";
 require __DIR__ . "/Toy.php";
+require __DIR__ . "/Collar.php";
 
 $cani = new Category("cani", "<i class=\"fa-solid fa-dog\"></i>");
 $gatti = new Category("gatti", "<i class=\"fa-solid fa-cat\"></i>");
@@ -16,7 +17,7 @@ $gatti = new Category("gatti", "<i class=\"fa-solid fa-cat\"></i>");
 // );
 
 $prodotto1 = new Food(
-    $cani,
+    [$cani],
     "prodtto prova",
     "15",
     "3",
@@ -24,22 +25,35 @@ $prodotto1 = new Food(
 );
 
 $prodotto2 = new Toy(
-    $gatti,
+    [$gatti],
     "prodotto prova due",
     "25",
     "4",
     "2",
 );
 
+$prodotto3= new Collar(
+    [$gatti,$cani],
+    "prodotto prova tre",
+    "12",
+    "5",
+    "15",
+);
+
+$prodotto3->setSize("M = 25cm");
+$prodotto3->setImg("https://assets.hermes.com/is/image/hermesproduct/medor-dog-collar--079813CJ3O-front-1-300-0-800-800_g.jpg");
+
 $prodotto2->setColor("Color red");
+$prodotto2->setImg("https://m.media-amazon.com/images/I/51Lck44D7dL.jpg");
 
 $prodotto1->setWeight("2kg");
+$prodotto1->setImg("https://www.foodpet.it/wp-content/uploads/2022/02/luscious_lamb_pork_2160x.jpg");
 
 $prodotto1->setStars(5);
 $prodotto1->setStars(3);
 $prodotto1->setStars(3);
 
-$products = [$prodotto1, $prodotto2];
+$products = [$prodotto1, $prodotto2, $prodotto3];
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +76,7 @@ $products = [$prodotto1, $prodotto2];
             <?= $product->name ?>
         </h1>
         <img src="<?= $product->img ?>" alt="">
-        <p>per : <?= $product->categories->name ?> <?=$product->categories->icon?></p>
+        <p>per : <?= $product->getCathegoryAsString() ?> <?=$product->getCathegoryIconAsString()?></p>
         <p> prezzo : <?= $product->getPrice() . '&euro;' ?></p>
         <p> stelle : <?= $product->getStars() ?> su 5 </p>
         <p> recensioni: <?= $product->reviews ?></p>
