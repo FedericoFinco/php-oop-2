@@ -1,5 +1,9 @@
 <?php 
+require_once __DIR__ . "/Stockable.php";
 class Product {
+
+    use Stockable;
+
     public $name;
     protected $price;
     protected $stars;
@@ -25,6 +29,21 @@ class Product {
     public function getPrice(){
         return $this->price;
     }
+
+    // public function getPrice() {
+
+	// 	if( is_null($this->price) || is_nan($this->price) ) {
+	// 		throw new Exception("valore non numerico");
+	// 	}
+
+	// 	if($this->price < 0) {
+	// 		throw new RangeException("prezzo negativo");
+	// 	} else if($this->price==0) {
+	// 		throw new RangeException("prezzo zero");
+	// 	}
+
+	// 	return $this->price . " €";
+	// }
 
     public function setStars($stars){
         // $stars = $_GET["stars"];
